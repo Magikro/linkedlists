@@ -35,4 +35,5 @@ void travList(struct node *head)
 {
 printf("Current node: " + head->data);
 
+
 }
