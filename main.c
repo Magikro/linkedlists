@@ -1,5 +1,59 @@
 #include"node.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+
+void travList(struct node *head)
+{
+    while ( head->next != NULL )
+    {
+        printf("Current node: %d\n", head->data);
+        head = head->next;
+    }
+        printf("Current node: %d\n", head->data);
+
+    while ( head->prev != NULL )
+    {
+        head = head->prev;
+        printf("Current node: %d\n", head->data);
+    }
+
+}
+
+void insertStart(int dater, struct node **head)
+{
+    struct node *newNode = (struct node*) malloc(sizeof(struct node));
+
+    newNode->data = dater;
+
+    newNode->prev = NULL;
+    newNode->next = (*head);
+    if ((*head) != NULL)
+    {
+        (*head)->prev = newNode;
+    }
+    (*head) = newNode;
+    printf("node %d added to the front.\n", newNode->data);
+}
+
+void insertEnd(int dater, struct node *head)
+{
+
+    struct node *newNode = (struct node*) malloc(sizeof(struct node));
+
+    newNode->data = dater;
+
+
+    while ( head->next != NULL )
+    {
+        head = head->next;
+    }
+
+    head->next = newNode;
+    newNode->prev = head;
+    newNode->next = NULL;
+    printf("node %d added to the end.\n", newNode->data);
+}
 
 int main(int argc, char const *argv[])
 {
@@ -27,13 +81,13 @@ int main(int argc, char const *argv[])
 
     head = one;
 
+    insertStart(0 , &head);
+    insertEnd(15, head);
+    insertStart(-1, &head);
+    
+
+    travList(head);
 
     return 0;
 }
 
-void travList(struct node *head)
-{
-printf("Current node: " + head->data);
-
-
-}
